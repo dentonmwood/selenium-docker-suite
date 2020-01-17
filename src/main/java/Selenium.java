@@ -10,7 +10,7 @@ import java.net.URL;
 public class Selenium {
     public static void main(String[] args) throws MalformedURLException {
         FirefoxOptions options = new FirefoxOptions();
-        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+        WebDriver driver = new RemoteWebDriver(new URL("http://selenium_hub:4444/wd/hub"), options);
 
         driver.get("http://www.google.com");
         WebElement element = driver.findElement(By.name("q"));
