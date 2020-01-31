@@ -1,3 +1,5 @@
+package tests;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,7 +32,6 @@ public class SeleniumTest {
         // firefoxDriver.get(ICPC_URL);
         chromeDriver.get(GOOGLE_URL);
         firefoxDriver.get(GOOGLE_URL);
-        System.out.println("hello world");
     }
 
     public void catchException(Exception e, WebDriver driver) {
@@ -52,7 +53,7 @@ public class SeleniumTest {
 //    }
 
     @Test
-    public void testPractice() {
+    public void practiceTest() {
         try {
             firefoxDriver.get("http://www.google.com");
             WebElement element = firefoxDriver.findElement(By.name("q"));
