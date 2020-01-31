@@ -12,11 +12,5 @@ FROM maven:3.6.3-jdk-8-slim as maven
 LABEL maintainer="denton_wood@baylor.edu"
 
 COPY pom.xml /pom.xml
-COPY src/main/java/* /src/main/java/
 COPY src/test/java/* /src/test/java/
-#RUN mvn clean package
 CMD ["mvn", "clean", "test"]
-
-#FROM openjdk:8-alpine
-#COPY --from=maven target/selenium-suite-1.0-SNAPSHOT.jar /selenium.jar
-#CMD ["java", "-jar", "/selenium.jar"]
