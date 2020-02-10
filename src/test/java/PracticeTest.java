@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,25 +11,28 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class PracticeTest extends GenericSeleniumTest {
     private static final String GOOGLE_URL = "http://www.google.com";
 
-    @BeforeEach
-    public void pointDrivers() {
-        chromeDriver.get(GOOGLE_URL);
-        firefoxDriver.get(GOOGLE_URL);
+    public static Stream<WebDriver> practiceProvider() {
+        for (WebDriver driver: drivers) {
+            driver.get(GOOGLE_URL);
+        }
+        return drivers.stream();
     }
 
-    @Test
-    public void testPractice() {
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("practiceProvider")
+    public void testPractice(WebDriver driver) {
         try {
-            WebElement element = firefoxDriver.findElement(By.name("q"));
+            WebElement element = driver.findElement(By.name("q"));
             element.sendKeys("Cheese!");
             element.submit();
-            System.out.println("Page title is: " + firefoxDriver.getTitle());
+            System.out.println("Page title is: " + driver.getTitle());
         } catch (Exception e) {
-            catchException(e, firefoxDriver);
+            catchException(e, driver);
         }
     }
 }

@@ -13,5 +13,30 @@ The test suite is designed to run End-to-End (E2E) tests on the microservices of
 Make sure you have [Docker Desktop](https://www.docker.com/products/docker-desktop) and [Docker Compose](https://docs.docker.com/compose/install/) downloaded and installed. Users running Windows Home may need to install [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) instead.
 
 ## Running the Tests
-Docker Compose builds the Selenium Hub and Node containers and runs the tests. Just run `docker-compose up --build` from the root directory of the project. Once the tests finish running, kill the process and run `docker-compose down` to clean out the images.
+Docker Compose builds the Selenium Grid setup (the Hub and Node containers). Before you run any tests, you need to boot them:
 
+```
+# Run in the root directory of the project
+docker-compose up -d
+```
+
+Note: if you're running Linux, add `sudo` to the beginning of the Docker commands.
+
+Once booted, the Grid containers will stay up until you take them down, so you can run the tests as many times as you like. You 
+might run them on a dedicated server and point the hub URL to it.
+
+After that, I've provided two scripts which build and run the tests using Docker. However, you can also configure Maven locally
+to run the scripts instead.
+
+```
+# Build the tests with Docker
+./build_tests.sh
+
+# Run the tests with Docker
+./run_tests.sh
+
+# Build and run the tests without Docker
+mvn clean test
+```
+
+The tests will be run by Maven's surefire plugin - just look for the success or failure message.

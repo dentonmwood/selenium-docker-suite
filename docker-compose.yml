@@ -21,15 +21,6 @@ services:
       HUB_PORT: 4444
     networks:
       - selenium-grid
-#  test:
-#    build: .
-#    networks:
-#      - selenium-grid
-#    volumes:
-#      - maven:/root/.m2
-#    depends_on:
-#      - chrome
-#      - firefox
 
 networks:
   selenium-grid:
