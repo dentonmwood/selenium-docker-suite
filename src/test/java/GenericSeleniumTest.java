@@ -25,13 +25,6 @@ public abstract class GenericSeleniumTest {
         drivers.add(new RemoteWebDriver(new URL(HUB_URL), new FirefoxOptions()));
     }
 
-    public void catchException(Exception e, WebDriver driver) {
-        System.err.println(e.getMessage());
-        driver.quit();
-        Assertions.fail();
-    }
-
-
     @AfterAll
     public static void closeDrivers() {
         for (WebDriver driver: drivers) {
