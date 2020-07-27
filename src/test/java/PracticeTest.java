@@ -22,13 +22,9 @@ public class PracticeTest extends GenericSeleniumTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("practiceProvider")
     public void testPractice(WebDriver driver) {
-        try {
-            WebElement element = driver.findElement(By.name("q"));
-            element.sendKeys("Cheese!");
-            element.submit();
-            System.out.println("Page title is: " + driver.getTitle());
-        } catch (Exception e) {
-            catchException(e, driver);
-        }
+        WebElement element = driver.findElement(By.name("q"));
+        element.sendKeys("Cheese!");
+        element.submit();
+        System.out.println("Page title is: " + driver.getTitle());
     }
 }
