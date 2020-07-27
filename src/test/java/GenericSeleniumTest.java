@@ -9,10 +9,14 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
+/**
+ * Generic test class which all test classes should implement. Creates web drivers
+ * for testing.
+ *
+ * @author Denton Wood
+ */
 public abstract class GenericSeleniumTest {
     protected static List<WebDriver> drivers;
     private static final String HUB_URL = "http://selenium_hub:4444/wd/hub";

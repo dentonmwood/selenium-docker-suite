@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "node-chrome-deployment"
+  labels:
+    role: "slave"
+spec:
+  replicas: 5
+  selector:
+  template:
+    metadata:
+      labels:
+        app: "node-chrome"
+    spec:
+      containers:
+        - name: "node-chrome-container"
+          image: "selenium/node-chrome"
+          env:
+            - name: HUB_HOST
+              value: "hub"
+            - name: HUB_PORT
+              value: "4444"

@@ -1,0 +1,21 @@
+# https://medium.com/style-theory-engineering/infrastructure-as-code-kubernetes-a2f050389f26
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "hub-deployment"
+  labels:
+    role: "master"
+spec:
+  replicas: 1
+  selector:
+  template:
+    metadata:
+      labels:
+        app: "hub"
+    spec:
+      containers:
+        - name: "hub-container"
+          image: "selenium/hub"
+          ports:
+            - containerPort: 4444

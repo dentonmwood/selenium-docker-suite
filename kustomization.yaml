@@ -1,0 +1,9 @@
+# https://kubectl.docs.kubernetes.io/pages/app_management/apply.html
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - kubernetes/hub.yaml
+  - kubernetes/node-firefox.yaml
+  - kubernetes/node-chrome.yaml

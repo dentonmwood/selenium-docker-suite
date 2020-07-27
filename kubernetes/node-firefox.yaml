@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "node-firefox-deployment"
+  labels:
+    role: "slave"
+spec:
+  replicas: 5
+  selector:
+  template:
+    metadata:
+      labels:
+        app: "node-firefox"
+    spec:
+      containers:
+        - name: "node-firefox-container"
+          image: "selenium/node-firefox"
+          env:
+            - name: HUB_HOST
+              value: "hub"
+            - name: HUB_PORT
+              value: "4444"
