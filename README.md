@@ -37,6 +37,9 @@ might run them on a dedicated server and point the hub URL to it.
 After that, build the tests with Docker Compose.
 
 ```
+# Get the URL to supply to compose for the Grid
+minikube service hub-service --url
+
 # Build the tests with Docker
 docker-compose up -d
 ```
