@@ -1,5 +1,3 @@
-# https://medium.com/style-theory-engineering/infrastructure-as-code-kubernetes-a2f050389f26
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -9,6 +7,8 @@ metadata:
 spec:
   replicas: 1
   selector:
+    matchLabels:
+      app: "hub"
   template:
     metadata:
       labels:

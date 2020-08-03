@@ -1,9 +1,10 @@
-# https://kubectl.docs.kubernetes.io/pages/app_management/apply.html
-
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+#namespace: "selenium-grid"
 
 resources:
-  - kubernetes/hub.yaml
-  - kubernetes/node-firefox.yaml
-  - kubernetes/node-chrome.yaml
+  - kubernetes/deployments/hub.yaml
+  - kubernetes/deployments/node-firefox.yaml
+  - kubernetes/deployments/node-chrome.yaml
+  - kubernetes/services/hub.yaml
+#  - kubernetes/scaling/node-firefox.yaml

@@ -12,7 +12,8 @@ Additionally, UI testing takes a while, and testing across multiple browsers can
 - **JUnit** - Java testing framework. Runs the tests and supplies input.
 - **Selenium** - Reactive testing framework. Spins up browser instances and collects output. **Selenium Grid** ensures that the tests can be run on multiple browsers. It consists of a Hub and a Node. The Node runs several browser instances which connect to the Hub.
 - **Maven** - dependency manager. Packages the tests as a JAR and handles any test dependencies.
-- **Docker** - container software. Sticks the JAR in a small Linux container that is independent of the surrounding environment (defined in the Dockerfile). **Docker Compose** spins up containers for all elements of the application (Postgre, Redis, the main myICPC application, the UI, etc.), and runs the tests.
+- **Docker** - containerization software. Sticks the JAR in a small Linux container that is independent of the surrounding environment (defined in the Dockerfile).
+- **Kubernetes** - orchestration software. Spins up containers for all elements of the application (Postgre, Redis, the main myICPC application, the UI, etc.), and runs the tests.
 
 ## Setup
 
@@ -23,29 +24,29 @@ Make sure you have [Docker Desktop](https://www.docker.com/products/docker-deskt
 Install [Docker Engine - Community](https://docs.docker.com/install/linux/docker-ce/ubuntu/) and [Docker Compose](https://docs.docker.com/compose/install/). Make sure to add `sudo` to all commands below.
 
 ## Running the Tests
-Docker Compose builds the Selenium Grid setup (the Hub and Node containers). Before you run any tests, you need to boot them:
+Kubernetes builds the Selenium Grid setup (the Hub and Node containers). Before you run any tests, you need to boot them:
 
 ```
 # Run in the root directory of the project
-docker-compose up -d
+kubectl apply -k .
 ```
-
-Note: if you're running Linux, add `sudo` to the beginning of the Docker commands.
 
 Once booted, the Grid containers will stay up until you take them down, so you can run the tests as many times as you like. You 
 might run them on a dedicated server and point the hub URL to it.
 
-After that, we've provided two scripts which build and run the tests using Docker. However, you can also configure Maven locally to run the scripts instead. Note that you'll need to change the URL for the grid in the JUnit code if you do this.
+After that, build the tests with Docker Compose.
 
 ```
 # Build the tests with Docker
-./build_tests.sh
-
-# Run the tests with Docker
-./run_tests.sh
-
-# Build and run the tests without Docker
-mvn clean test
+docker-compose up -d
 ```
 
 The tests will be run by Maven's surefire plugin - just look for the success or failure message.
+
+Citations:
+- https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#-strong-api-overview-strong-
+- https://kubectl.docs.kubernetes.io/pages/app_management/apply.html
+- https://medium.com/style-theory-engineering/infrastructure-as-code-kubernetes-a2f050389f26
+- https://www.swtestacademy.com/parallel-distributed-testing-with-kubernetes-docker-and-selenium-grid/
+- https://cloud.google.com/kubernetes-engine/docs/how-to/horizontal-pod-autoscaling
+- https://www.baeldung.com/maven-junit-parallel-tests

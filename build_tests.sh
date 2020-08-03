@@ -1,1 +1,0 @@
-docker build --tag selenium-tests --no-cache .

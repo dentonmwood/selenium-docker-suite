@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,8 +18,7 @@ import java.util.List;
  */
 public abstract class GenericSeleniumTest {
     protected static List<WebDriver> drivers;
-    private static final String HUB_URL = "http://selenium_hub:4444/wd/hub";
-    // private static final String HUB_URL = "http://localhost:4444/wd/hub";
+    private static final String HUB_URL = System.getenv("HUB_URL") + "/wd/hub";
 
     @BeforeAll
     public static void initDrivers() throws MalformedURLException {
